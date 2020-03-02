@@ -1,49 +1,54 @@
 /* 初始化样式 */
-html{
-  height: 100%;
-}
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
-#root{
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+body::-webkit-scrollbar{
+  display: none;
 }
 
+#root{
+  position: relative;
+}
 /* index样式 */
 /* 宽高都为100%的 */
-.container,.swiper,.arrowShield{
+.swiperContainer,.swiper,.arrowShield{
   height: 100%;
   width: 100%;
 }
-.container{
-  background-color: #99CC99;
+.swiperContainer{
+  height: calc(100vh);
   box-sizing: border-box;
   padding: 5% 10%;
+  background: url(./assets/bgi/bgi3.jpg) no-repeat scroll;
+  background-size: cover;
+  transition: all 1.5s ease;
+  overflow: hidden;
 }
-
 
 /* 轮播图 */
 .swiper{
   position: relative;
-  background-color: #003300;
 }
 /* 轮播图控件样式 */
 .letfArrow,.rightArrow{
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   width:50px;
   height: 100px;
-  z-index: 100;
+  z-index: 1;
+  background-color: rgba(100,100,100,0.5);
+  border-radius: 25px 25px 25px 25px ;
+}
+.letfArrow{
+  transform: translateY(-50%) rotate(-5deg);
+  animation: leftArrow 5s ease 1s infinite;
 }
 .rightArrow{
   right: 0;
-  transform: rotate(180deg) translateY(50%);
-  transform-origin: center center;
+  transform: translateY(-50%)  rotate(185deg);
+  /* transform-origin: center center; */
+  animation: rightArrow 5s ease 1s infinite;
 }
 .arrowShield{
   position: absolute;
@@ -54,18 +59,40 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: all 2s ease;
-  overflow-x: hidden;
+  transition: all 1.5s ease;
   height: 80%;
 }
 /* 每一项 */
 .swiperContentItem{
+  position: relative;
   float: left;
   height: 100%;
-  background-color: #ffeb00;
-  transition: all 2s ease;
+  transition: all 1.5s ease;
+  box-shadow: 20px 35px 10px #000;
 }
+.swiperContentItem img{
+  width: 100%;
+  height: 100%;
+}
+.swiperContentItem p{
+  position: absolute;
+}
+
 /* 非当前项样式 */
 .transform{
 transform: scale(0.8);
+box-shadow: 10px 15px 10px #333;
+}
+
+
+/* 相册列表样式 */
+.albumContainer{
+  width: 100%;
+  min-height:  calc(150vh);
+  background: url(./assets/bgi/bgi2.jpg) no-repeat scroll;
+  background-size: cover;
+  position: absolute;
+  top:calc(100vh);
+  transition: all 1.5s ease;
+  z-index: 2;
 }

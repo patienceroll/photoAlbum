@@ -3,63 +3,102 @@ import ReactDOM from 'react-dom';
 
 // 样式
 import './index.css';
+// 测试用的图片资源
+import bgi from './bgis.js';
+
+import './animate/animate.css';
 
 // svg图片
 import { Arrow } from './assets/icon(componenty)/icon.js';
 
+const ref = React.createRef();
 
+
+class Album extends React.Component {
+
+    scrollTopAnimate() {
+        // 先滚动album 到顶部
+        ref.current.style.top = 'calc(100vh)';
+
+        // 然后滚下来轮播图
+        setTimeout(() => {
+            let id = null;
+            function scroll() {
+                const top = window.scrollY;
+                if (top > 0) {
+                    window.scrollTo(0, top - Math.min(top / 65) - 3);
+                    id = window.requestAnimationFrame(scroll);
+                }
+                if (top <= 0) {
+                    window.scrollTo(0, 0);
+                    cancelAnimationFrame(id);
+                }
+            }
+            scroll();
+        }, 800);
+
+    }
+    render() {
+        return <div
+            className='albumContainer'
+            ref={ref}
+            onClick={e => this.scrollTopAnimate()}
+        >
+            <h1 style={{color:'#fff',backgroundColor:'rgba(0,0,0,0.5)'}}>此页面用来展示每个相册合集里面的相片.</h1>
+        </div>
+    }
+}
 
 class Swiper extends React.Component {
     state = {
         list: [
             {
-                imgSrc: '',
+                imgSrc: bgi.bgi1,
                 content: '',
                 index: 0
             },
             {
-                imgSrc: '',
+                imgSrc: bgi.bgi2,
                 content: '',
                 index: 1
             },
             {
-                imgSrc: '',
+                imgSrc: bgi.bgi3,
                 content: '',
                 index: 2
             },
             {
-                imgSrc: '',
+                imgSrc: bgi.bgi2,
                 content: '',
                 index: 2
             },
             {
-                imgSrc: '',
+                imgSrc: bgi.bgi1,
                 content: '',
                 index: 2
             }
         ],
         currentSwiperItem: 1
-
     }
-
 
     // 渲染轮播图内容
     renderSwiperContent() {
-        const { list,currentSwiperItem } = this.state;
+        const { list, currentSwiperItem } = this.state;
         return list.map((item, index) => <div
-            className={currentSwiperItem === index + 1?'swiperContentItem':'swiperContentItem transform'}
+            className={currentSwiperItem === index + 1 ? 'swiperContentItem' : 'swiperContentItem transform'}
             style={{
                 width: `${0.8 / list.length * 100}%`,
                 marginLeft: `${0.1 / list.length * 100}%`
             }}
             key={index}
+            onClick={e => ref.current.style.top = '0'}
         >
-            <img alt='轮播图片' />
+            <img alt='轮播图片' src={item.imgSrc} />
             <p></p>
         </div>)
     }
 
-    // 
+    // 滑动轮播图
     async slideSwiper(e, direction) {
         const { target } = e;
         const { currentSwiperItem, list } = this.state;
@@ -74,8 +113,8 @@ class Swiper extends React.Component {
             await this.setState({ currentSwiperItem: currentSwiperItem !== 1 ? currentSwiperItem - 1 : 1 });
         }
         if (direction === 'right') {
-            await this.setState({ currentSwiperItem: currentSwiperItem !== listLength ? currentSwiperItem + 1 : listLength});
-            
+            await this.setState({ currentSwiperItem: currentSwiperItem !== listLength ? currentSwiperItem + 1 : listLength });
+
         }
         // 这里用到 this.state.currentSwiperItem 的原因是虽然更新了state的参数，但当前作用域下的参数并没有改变
         swiperContent.style.transform = `translate(-${0.9 * width * (this.state.currentSwiperItem - 1)}px,-50%)`;
@@ -83,7 +122,9 @@ class Swiper extends React.Component {
 
     render() {
         const { list } = this.state;
-        return <div className='swiper'>
+        return <div
+            className='swiper'
+        >
 
             {/* 轮播图控件 */}
             <div
@@ -93,7 +134,7 @@ class Swiper extends React.Component {
                 {/* 以下的div盒子避免点击到svg里面的内容 */}
                 <div className='arrowShield'></div>
 
-                {Arrow({ color: '#CCCCFF', height: 'inherit', width: 'inherit' })}
+                {Arrow({ color: '#fff', height: 'inherit', width: 'inherit' })}
 
             </div>
 
@@ -103,7 +144,7 @@ class Swiper extends React.Component {
             >
                 {/* 以下的div盒子避免点击到svg里面的内容 */}
                 <div className='arrowShield'></div>
-                {Arrow({ color: '#CCCCFF', height: 'inherit', width: 'inherit' })}
+                {Arrow({ color: '#fff', height: 'inherit', width: 'inherit' })}
             </div>
 
 
@@ -117,10 +158,18 @@ class Swiper extends React.Component {
 
 
 class Index extends React.Component {
+    componentDidMount() {
+        document.getElementsByClassName('swiperContainer')[0].addEventListener('wheel', function (e) {
+            e.preventDefault()
+        }, { passive: false })
+    }
     render() {
-        return <div className='container'>
-            <Swiper></Swiper>
-        </div>
+        return <>
+            <div className='swiperContainer'>
+                <Swiper></Swiper>
+            </div>
+            <Album></Album>
+        </>
     }
 }
 

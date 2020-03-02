@@ -1,0 +1,28 @@
+@keyframes leftArrow {
+    25%{
+        transform: translateY(-50%) rotate(5deg);
+    }
+    50%{
+        transform: translateY(-50%) rotate(5deg);
+    }
+    75%{
+        transform: translateY(-50%) rotate(-5deg);
+    }
+    100%{
+        transform: translateY(-50%) rotate(-5deg);
+    }
+}
+@keyframes rightArrow {
+    25%{
+        transform: translateY(-50%) rotate(175deg);
+    }
+    50%{
+        transform: translateY(-50%) rotate(175deg);
+    }
+    75%{
+        transform: translateY(-50%) rotate(185deg);
+    }
+    100%{
+        transform: translateY(-50%) rotate(185deg);
+    }
+}
