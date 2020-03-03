@@ -26,3 +26,21 @@
         transform: translateY(-50%) rotate(185deg);
     }
 }
+
+@keyframes tips{
+    from{
+        color:#000;
+    }
+    35%{
+        color:#000;
+    }
+    50%{
+        color:#ffeb00;
+    }
+    65%{
+        color:#000;
+    }
+    to{
+        color:#000;
+    }
+}

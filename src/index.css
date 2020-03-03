@@ -10,12 +10,30 @@ body::-webkit-scrollbar{
 #root{
   position: relative;
 }
+p{
+  margin: 0;
+}
 /* index样式 */
 /* 宽高都为100%的 */
 .swiperContainer,.swiper,.arrowShield{
   height: 100%;
   width: 100%;
 }
+
+/* 竖屏设备,提醒横屏 */
+.tips{
+  display: none;
+}
+@media screen and (max-width:900px){
+  .tips{
+    float: left;
+    display: block;
+    color: #000;
+    font-size: 14px;
+    animation: tips 5s ease 0s infinite;
+  }
+}
+
 .swiperContainer{
   height: calc(100vh);
   box-sizing: border-box;
@@ -24,12 +42,16 @@ body::-webkit-scrollbar{
   background-size: cover;
   transition: all 1.5s ease;
   overflow: hidden;
+  touch-action: none;
 }
 
 /* 轮播图 */
 .swiper{
   position: relative;
+  z-index: 1;
+
 }
+
 /* 轮播图控件样式 */
 .letfArrow,.rightArrow{
   position: absolute;
@@ -61,21 +83,64 @@ body::-webkit-scrollbar{
   transform: translateY(-50%);
   transition: all 1.5s ease;
   height: 80%;
+  
 }
-/* 每一项 */
+.swiperContainer::after{
+  content: "";
+  width:100%;
+  height:100%;
+  position: absolute;
+  left:0;
+  top:0;
+  background-color: #ffeb00;
+  opacity: 0.2;
+  filter: blur(4px);
+  z-index: 0;
+}
+
+/* 轮播图每一项 */
 .swiperContentItem{
   position: relative;
   float: left;
   height: 100%;
   transition: all 1.5s ease;
   box-shadow: 20px 35px 10px #000;
+  overflow: hidden;
 }
-.swiperContentItem img{
+.swiperContentItem div{
+  background-size: cover;
   width: 100%;
   height: 100%;
 }
 .swiperContentItem p{
   position: absolute;
+  width: 30%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  font-size: 7vh;
+  font-weight: bold;
+  align-items: center;
+  background-color: #ffeb00;
+  text-align: center;
+  opacity: 0.7;
+  border-radius: 30px;
+}
+.leftBottom{
+  left: 3%;
+  bottom: 3%;
+}
+.leftTop{
+  left: 3%;
+  top:3%;
+}
+.rightTop{
+  top: 3%;
+  right: 3%;
+}
+.rightBottom{
+  right: 3%;
+  bottom: 3%;
 }
 
 /* 非当前项样式 */
