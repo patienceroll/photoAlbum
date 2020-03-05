@@ -41,6 +41,14 @@ class Swiper extends React.Component {
         currentSwiperItem: 1
     }
 
+    // 滑动出相册
+    showPhotoAlbum() {
+        this.albumContainer.style.top = '0';
+        document.getElementsByClassName('downIconContainer')[0].className = 'downIconContainer displayNone';
+        document.getElementsByClassName('XIcon')[0].className = 'XIcon';
+    }
+
+
     // 渲染轮播图内容
     renderSwiperContent() {
         const { list, currentSwiperItem } = this.state;
@@ -51,15 +59,14 @@ class Swiper extends React.Component {
                 marginLeft: `${0.1 / list.length * 100}%`
             }}
             key={index}
-            onClick={e => {
-                this.albumContainer.style.top = '0';
-                document.getElementsByClassName('downIconContainer')[0].className = 'downIconContainer displayNone';
-            }}
+            onClick={e => this.showPhotoAlbum()}
         >
             <div style={{ backgroundImage: `url(${item.imgSrc})` }} ></div>
             <p className={item.titlePositon}>{item.content}</p>
         </div>)
     }
+
+
 
     // 滑动轮播图
     async slideSwiper(e, direction) {
@@ -83,7 +90,7 @@ class Swiper extends React.Component {
         swiperContent.style.transform = `translate(-${0.9 * width * (this.state.currentSwiperItem - 1)}px,-50%)`;
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.albumContainer = document.getElementsByClassName('albumContainer')[0];
     }
 

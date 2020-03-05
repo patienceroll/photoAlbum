@@ -11,3 +11,8 @@
     /* filter: blur(1.5px); */
   }
   
+  .XIcon{
+    position: fixed;
+    top:3vh;
+    right: 3vh;
+  }
