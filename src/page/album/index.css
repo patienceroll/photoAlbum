@@ -1,0 +1,13 @@
+/* 相册列表样式 */
+.albumContainer{
+    width: 100%;
+    min-height:  calc(150vh);
+    background-size: cover;
+    position: absolute;
+    top:calc(100vh);
+    transition: all 1.5s ease;
+    z-index: 2;
+    background: url(../../assets/bgi/bgi2.jpg) no-repeat scroll;
+    /* filter: blur(1.5px); */
+  }
+  

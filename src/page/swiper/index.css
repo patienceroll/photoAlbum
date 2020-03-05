@@ -1,0 +1,114 @@
+/* 轮播图 */
+.swiper{
+    position: relative;
+    z-index: 1;
+  
+  }
+  
+  /* 轮播图控件样式 */
+  .letfArrow,.rightArrow{
+    position: absolute;
+    top: 50%;
+    width: 6vh;
+    height: 12vh;
+    z-index: 1;
+    background-color: rgba(100,100,100,0.5);
+    border-radius: 25px 25px 25px 25px ;
+  }
+  
+  .letfArrow{
+    transform: translateY(-50%) rotate(-5deg);
+    animation: leftArrow 5s ease 1s infinite;
+  }
+  
+  .rightArrow{
+    right: 0;
+    transform: translateY(-50%)  rotate(185deg);
+    animation: rightArrow 5s ease 1s infinite;
+  }
+  
+  .arrowShield{
+    position: absolute;
+  }
+  
+  /* 轮播图内容区域 */
+.swiperContent{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 1.5s ease;
+    height: 80%;
+  }
+  
+  .swiperContainer::after{
+    display: block;
+    content: "";
+    width:100%;
+    height:100%;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 0;
+  }
+  .swiperContainer::after{
+    opacity: 0.2;
+    background-color: #ffeb00;
+  }
+  
+  /* 轮播图每一项 */
+  .swiperContentItem{
+    position: relative;
+    float: left;
+    height: 100%;
+    transition: all 1.5s ease;
+    box-shadow: 20px 35px 10px #000;
+    overflow: hidden;
+  }
+  
+  .swiperContentItem div{
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiperContentItem p{
+    position: absolute;
+    width: 30%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    font-size: 7vh;
+    font-weight: bold;
+    align-items: center;
+    background-color: #ffeb00;
+    text-align: center;
+    opacity: 0.7;
+    border-radius: 30px;
+  }
+  
+  .leftBottom{
+    left: 3%;
+    bottom: 3%;
+  }
+  
+  .leftTop{
+    left: 3%;
+    top:3%;
+  }
+  
+  .rightTop{
+    top: 3%;
+    right: 3%;
+  }
+  
+  .rightBottom{
+    right: 3%;
+    bottom: 3%;
+  }
+  
+  /* 非当前项样式 */
+  .transform{
+  transform: scale(0.8);
+  box-shadow: 10px 15px 10px #333;
+  }
+  
