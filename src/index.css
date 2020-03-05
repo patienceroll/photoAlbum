@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 body::-webkit-scrollbar{
   display: none;
 }
@@ -10,9 +11,15 @@ body::-webkit-scrollbar{
 #root{
   position: relative;
 }
+
 p{
   margin: 0;
 }
+
+.displayNone{
+  display: none;
+}
+
 /* index样式 */
 /* 宽高都为100%的 */
 .swiperContainer,.swiper,.arrowShield{
@@ -24,6 +31,7 @@ p{
 .tips{
   display: none;
 }
+
 @media screen and (max-width:900px){
   .tips{
     float: left;
@@ -38,11 +46,12 @@ p{
   height: calc(100vh);
   box-sizing: border-box;
   padding: 5% 10%;
-  background: url(./assets/bgi/bgi3.jpg) no-repeat scroll;
   background-size: cover;
   transition: all 1.5s ease;
   overflow: hidden;
   touch-action: none;
+  background: url(./assets/bgi/bgi3.jpg) no-repeat scroll;
+
 }
 
 /* 轮播图 */
@@ -56,24 +65,36 @@ p{
 .letfArrow,.rightArrow{
   position: absolute;
   top: 50%;
-  width:50px;
-  height: 100px;
+  width: 6vh;
+  height: 12vh;
   z-index: 1;
   background-color: rgba(100,100,100,0.5);
   border-radius: 25px 25px 25px 25px ;
 }
+
 .letfArrow{
   transform: translateY(-50%) rotate(-5deg);
   animation: leftArrow 5s ease 1s infinite;
 }
+
 .rightArrow{
   right: 0;
   transform: translateY(-50%)  rotate(185deg);
-  /* transform-origin: center center; */
   animation: rightArrow 5s ease 1s infinite;
 }
+
 .arrowShield{
   position: absolute;
+}
+
+.downIconContainer{
+  width: 15vh;
+  height: 7.5vh;
+  position: fixed;
+  animation: down 3s ease 0s infinite;
+  bottom: 0;
+  left: 50%;
+  z-index: 2;
 }
 
 /* 轮播图内容区域 */
@@ -83,19 +104,21 @@ p{
   transform: translateY(-50%);
   transition: all 1.5s ease;
   height: 80%;
-  
 }
+
 .swiperContainer::after{
+  display: block;
   content: "";
   width:100%;
   height:100%;
   position: absolute;
   left:0;
   top:0;
-  background-color: #ffeb00;
-  opacity: 0.2;
-  filter: blur(4px);
   z-index: 0;
+}
+.swiperContainer::after{
+  opacity: 0.2;
+  background-color: #ffeb00;
 }
 
 /* 轮播图每一项 */
@@ -107,11 +130,13 @@ p{
   box-shadow: 20px 35px 10px #000;
   overflow: hidden;
 }
+
 .swiperContentItem div{
   background-size: cover;
   width: 100%;
   height: 100%;
 }
+
 .swiperContentItem p{
   position: absolute;
   width: 30%;
@@ -126,18 +151,22 @@ p{
   opacity: 0.7;
   border-radius: 30px;
 }
+
 .leftBottom{
   left: 3%;
   bottom: 3%;
 }
+
 .leftTop{
   left: 3%;
   top:3%;
 }
+
 .rightTop{
   top: 3%;
   right: 3%;
 }
+
 .rightBottom{
   right: 3%;
   bottom: 3%;
@@ -149,15 +178,15 @@ transform: scale(0.8);
 box-shadow: 10px 15px 10px #333;
 }
 
-
 /* 相册列表样式 */
 .albumContainer{
   width: 100%;
   min-height:  calc(150vh);
-  background: url(./assets/bgi/bgi2.jpg) no-repeat scroll;
   background-size: cover;
   position: absolute;
   top:calc(100vh);
   transition: all 1.5s ease;
   z-index: 2;
+  background: url(./assets/bgi/bgi2.jpg) no-repeat scroll;
+  /* filter: blur(1.5px); */
 }

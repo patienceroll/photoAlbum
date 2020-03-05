@@ -9,7 +9,7 @@ import bgi from './bgis.js';
 import './animate/animate.css';
 
 // svg图片
-import { Arrow } from './assets/icon(componenty)/icon.js';
+import { Arrow, XIcon, Down } from './assets/icon(componenty)/icon.js';
 
 const ref = React.createRef();
 
@@ -54,21 +54,20 @@ class Album extends React.Component {
         ref.current.style.top = 'calc(100vh)';
 
         // 然后滚下来轮播图
-        setTimeout(() => {
-            let id = null;
-            function scroll() {
-                const top = window.scrollY;
-                if (top > 0) {
-                    window.scrollTo(0, top - Math.min(top / 65) - 3);
-                    id = window.requestAnimationFrame(scroll);
-                }
-                if (top <= 0) {
-                    window.scrollTo(0, 0);
-                    cancelAnimationFrame(id);
-                }
+        let id = null;
+        function scroll() {
+            const top = window.scrollY;
+            if (top > 0) {
+                window.scrollTo(0, top - Math.min(top / 65) - 3);
+                id = window.requestAnimationFrame(scroll);
             }
-            scroll();
-        }, 800);
+            if (top <= 0) {
+                window.scrollTo(0, 0);
+                cancelAnimationFrame(id);
+                document.getElementsByClassName('downIconContainer')[0].className = 'downIconContainer';
+            }
+        }
+        scroll();
     }
 
 
@@ -81,6 +80,7 @@ class Album extends React.Component {
             onClick={e => this.scrollTopAnimate()}
         >
             <h1 style={{ color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)' }}>此页面用来展示每个相册合集里面的相片.</h1>
+            <div>{XIcon({ color: '#fff' })}</div>
         </div>
     }
 }
@@ -131,7 +131,10 @@ class Swiper extends React.Component {
                 marginLeft: `${0.1 / list.length * 100}%`
             }}
             key={index}
-            onClick={e => ref.current.style.top = '0'}
+            onClick={e => {
+                ref.current.style.top = '0';
+                document.getElementsByClassName('downIconContainer')[0].className = 'downIconContainer displayNone';
+            }}
         >
             <div style={{ backgroundImage: `url(${item.imgSrc})` }} ></div>
             <p className={item.titlePositon}>{item.content}</p>
@@ -175,7 +178,6 @@ class Swiper extends React.Component {
                 <div className='arrowShield'></div>
 
                 {Arrow({ color: '#fff', height: 'inherit', width: 'inherit' })}
-
             </div>
 
             <div
@@ -192,10 +194,10 @@ class Swiper extends React.Component {
             <div className='swiperContent' style={{ width: `${list.length * 100}%` }}>
                 {this.renderSwiperContent()}
             </div>
+
         </div>
     }
 }
-
 
 class Index extends React.Component {
 
@@ -218,7 +220,7 @@ class Index extends React.Component {
             }
         }
 
-        // 挂载时媒体查询屏幕小于 900px ,则 14 秒后隐藏 tips
+        // 挂载时媒体查询屏幕小于 900px ,则 10 秒后隐藏 tips
         setTimeout(() => {
             document.getElementsByClassName('tips')[0].style.display = 'none';
         }, 10000);
@@ -229,10 +231,26 @@ class Index extends React.Component {
 
     render() {
         return <>
+            {/* 轮播图部分 */}
             <div className='swiperContainer'>
+
                 <p className='tips'>竖屏设备请横屏吧,体验更佳 ^-^</p>
+
                 <Swiper></Swiper>
             </div>
+
+            {/* 下箭头 */}
+            <div
+                    className='downIconContainer'
+                    onClick={e => {
+                        ref.current.style.top = '0';
+                        document.getElementsByClassName('downIconContainer')[0].className = 'downIconContainer displayNone';
+                    }}
+                >
+                    {Down({ color: '#fff' })}
+                </div>
+
+            {/* 相册部分 */}
             <Album></Album>
         </>
     }
