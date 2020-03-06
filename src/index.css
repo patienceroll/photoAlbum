@@ -2,7 +2,22 @@
 body {
   margin: 0;
   padding: 0;
+  /* 禁止选中 */
+  -moz-user-select:none; /*火狐*/
+  -webkit-user-select:none; /*webkit浏览器*/
+  -ms-user-select:none; /*IE10*/
+  -khtml-user-select:none; /*早期浏览器*/
+  user-select:none;
+  /* 禁止移动端选中 */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+
+
 
 body::-webkit-scrollbar{
   display: none;

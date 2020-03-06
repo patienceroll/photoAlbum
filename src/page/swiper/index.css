@@ -80,9 +80,10 @@
     font-size: 7vh;
     font-weight: bold;
     align-items: center;
-    background-color: #ffeb00;
+    text-shadow:3px 3px 4px #000 ;
+    color: #fff;
     text-align: center;
-    opacity: 0.7;
+    opacity: 0.9;
     border-radius: 30px;
   }
   
